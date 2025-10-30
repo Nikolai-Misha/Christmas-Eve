@@ -109,9 +109,9 @@ max-width: 1000px; /* Giới hạn chiều rộng trên màn hình lớn */
 /* Định nghĩa animation "blink" (nhấp nháy) */
 @keyframes blink {
     from {
-        text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+        text-shadow: 0 0 5px #FFD700, 0 0 5px #FFD700;
     }
     to {
-        text-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700;
+        text-shadow: 0 0 10px #FFD700, 0 0 10px #FFD700;
     }
 }
