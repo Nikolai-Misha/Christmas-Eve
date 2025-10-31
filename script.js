@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Lấy năm hiện tại
         const currentYear = new Date().getFullYear();
         // Ngày Giáng sinh (25/12)
-        const christmasDate = new Date(`December 25, ${currentYear} 00:00:00`);
+        const christmasDate = new Date(`December 26, ${currentYear} 00:00:00`);
         const currentDate = new Date();
 
         // Tính toán thời gian còn lại (tính bằng giây)
