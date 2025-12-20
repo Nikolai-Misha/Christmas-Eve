@@ -67,11 +67,14 @@
         #main-title {
             position: absolute; top: 30px; left: 40px; /* Dời sang trái */
             text-align: left;
-            color: #FFD700; font-size: 28px; letter-spacing: 6px; opacity: 0.9; 
-            text-transform: uppercase; 
+            color: #FFD700; font-size: 28px; letter-spacing: 2px; opacity: 0.9; 
+            text-transform: none; 
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 165, 0, 0.6);
             pointer-events: none; transition: opacity 0.5s;
             z-index: 5;
+            max-width: calc(100vw - 80px);
+            white-space: normal;
+            word-wrap: break-word;
         }
         
         /* --- 4. CAMERA CONTAINER --- */
@@ -141,7 +144,7 @@
         </div>
     </div>
 
-    <div id="main-title">Giáng sinh an lành😘</div>
+    <div id="main-title">Luôn vui vẻ, yêu đời nhé cô gái xinh đẹp ơiii😘</div>
 
     <div id="cam-container">
         <video id="cam-preview" playsinline autoplay muted></video>
@@ -162,7 +165,7 @@
                 overlay.style.visibility = 'hidden';
             }, 800);
             const music = document.getElementById('background-music');
-            music.volume = 0.05; // Giảm âm lượng xuống 5%
+            music.volume = 0.03; // Giảm âm lượng xuống 5%
             music.play();
         }
     </script>
@@ -340,7 +343,8 @@
                 const myImages = [
                     "https://image2url.com/images/1766246924277-22d742e7-f0ba-4609-8afd-594e4684f91c.jpg",
                     "https://image2url.com/images/1766246974272-42374dd6-bc28-4006-b2be-670b59d79903.jpg",
-                    "https://image2url.com/images/1766246996386-028a15cf-a7f7-467b-b782-7b92f70ed5d0.jpg"
+                    "https://image2url.com/images/1766246996386-028a15cf-a7f7-467b-b782-7b92f70ed5d0.jpg",
+                    "https://image2url.com/images/1766253171210-ced99610-84c9-4caa-83d9-935ea7093a55.jpg"
                 ];
                 // ============================================
 
@@ -578,6 +582,7 @@
                         document.getElementById('main-title').innerText = "Giáng sinh an lành😘";
                     } else if (targetMode === 'text') {
                         this.targetPositions = this.positions.text;
+                        document.getElementById('main-title').innerText = "Luôn vui vẻ, yêu đời nhé cô gái xinh đẹp ơiii😘";
                     }
                 }, 2000); 
             }

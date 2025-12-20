@@ -12,10 +12,10 @@
     <div id="snow-container"></div>
 
     <main>
-        <h1 class="christmas-title">Chờ giáng sinh cùng tôi nhé!</h1>
+        <h1 class="christmas-title">Chờ giáng sinh cùng tôi nhé cậu ui🥰!</h1>
         <h2 class="christmas-title star">⭐</h2>
         
-        <p class="countdown-text">Chỉ còn chừng... 🤔</p>
+        <p class="countdown-text">Chỉ còn chừng...🤔</p>
 
         <div id="countdown">
             <div class="time-block">
@@ -37,6 +37,35 @@
         </div>
     </main>
 
-    <script src="script.js"></script>
+    <script>
+        const christmas = new Date('December 25, 2025 00:00:00');
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = christmas - now;
+
+            if (diff <= 0) {
+                document.querySelector('.countdown-text').innerText = "Giáng sinh đến rồi cậu à🎄!";
+                document.getElementById('countdown').style.display = 'none';
+                setTimeout(() => {
+                    window.location.href = 'Gift.html';
+                }, 3000);
+                return;
+            }
+
+            const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>

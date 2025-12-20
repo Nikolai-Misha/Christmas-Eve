@@ -127,7 +127,7 @@ main {
 /* Màn hình lớn (mặc định) */
 @media (min-width: 769px) {
     .christmas-title {
-        font-size: 4rem;
+        font-size: 3rem;
     }
     .christmas-title.star {
         font-size: 4rem;
