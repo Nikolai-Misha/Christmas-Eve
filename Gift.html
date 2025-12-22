@@ -414,7 +414,7 @@
                     treeArr.push(new THREE.Vector3(Math.cos(theta)*rVar, y, Math.sin(theta)*rVar));
                 }
                 this.positions.tree = treeArr;
-                await this.updateText("Pretty girl!");
+                await this.updateText("P r e t t y  g i r l !");
             }
 
             updateText(str) {
@@ -534,8 +534,6 @@
                                  const timeLeft = Math.ceil((3000 - elapsed)/1000);
                                  statusEl.innerHTML = `☝🏻 Giữ yên 1 ngón tay sau ${timeLeft}s để quay về cây thông`;
                             }
-                        } else {
-                            this.holdStart = 0; statusEl.innerHTML = "☝🏻 1 ngón tay: cây thông | 👋🏻 Lắc tay = Bùm";
                         }
                     } else {
                         this.holdStart = 0; this.twoFingerStart = 0;
@@ -560,7 +558,7 @@
                     this.state.targetRotationSpeed = 0.05; 
                     const cvs = document.getElementById('hand-canvas');
                     cvs.getContext('2d').clearRect(0,0,cvs.width, cvs.height);
-                    statusEl.innerHTML = "Đang tìm bàn tay... (Có thể dùng chuột)";
+                    statusEl.innerHTML = "Đang tìm bàn tay... (Dùng chuột để xoay cây thông🔄️)";
                 }
             }
 
