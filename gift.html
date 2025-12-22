@@ -222,8 +222,6 @@
                 this.frames = []; 
                 this.dummy = new THREE.Object3D(); 
 
-                this.lastShakeX = 0; 
-                this.shakeCounter = 0;
                 this.lastTime = 0;
                 this.lastPredictionTime = 0; 
                 this.mouse = new THREE.Vector2(999, 999);
@@ -423,7 +421,7 @@
                     treeArr.push(new THREE.Vector3(Math.cos(theta)*rVar, y, Math.sin(theta)*rVar));
                 }
                 this.positions.tree = treeArr;
-                await this.updateText("P r e t t y  g i r l !");
+                await this.updateText("Pretty girl!");
             }
 
             updateText(str) {
@@ -544,7 +542,7 @@
                                  statusEl.innerHTML = `☝🏻 Giữ yên 1 ngón tay sau ${timeLeft}s để quay về cây thông`;
                             }
                         } else {
-                            this.holdStart = 0; statusEl.innerHTML = "☝🏻 1 ngón tay: cây thông | 👋🏻 Lắc tay = Bùm";
+                            this.holdStart = 0; statusEl.innerHTML = "☝🏻 1 ngón tay: cây thông";
                         }
                     } else {
                         this.holdStart = 0; this.twoFingerStart = 0;
