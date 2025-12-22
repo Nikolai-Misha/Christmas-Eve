@@ -110,6 +110,15 @@
             padding: 10px; border-radius: 8px; border-left: 2px solid #D4AF37;
         }
 
+/* Tablet & Mobile lớn (≤768px) */
+@media (max-width: 768px) {body{padding:15px;}#main-title{font-size:2.8rem;line-height:1.2;}#gesture-debug{font-size:1.3rem;}#cam-container{width:180px;height:135px;bottom:15px;left:15px;}#intro-box{padding:30px 40px;}#intro-box h2{font-size:2.2rem;}.guide-item{font-size:1.8rem;}#start-btn{padding:10px 30px;font-size:1.4rem;}}
+
+/* Mobile nhỏ (≤480px) */
+@media (max-width: 480px) {body{padding:10px;}#main-title{font-size:2.2rem;}#gesture-debug{font-size:1.1rem;}#cam-container{width:150px;height:112.5px;bottom:10px;left:10px;}#intro-box{padding:20px 30px;}#intro-box h2{font-size:1.8rem;}.guide-item{font-size:1.5rem;}#start-btn{padding:8px 25px;font-size:1.2rem;}}
+
+/* Siêu nhỏ (≤350px) */
+@media (max-width: 350px) {#main-title{font-size:1.9rem;}#gesture-debug{font-size:1rem;}#cam-container{width:130px;height:97.5px;}#intro-box{padding:15px 25px;}#intro-box h2{font-size:1.6rem;}.guide-item{font-size:1.3rem;}#start-btn{padding:6px 20px;font-size:1rem;}}
+
     </style>
 </head>
 <body>
@@ -260,7 +269,7 @@
 
             initThree() {
                 this.scene = new THREE.Scene();
-                this.scene.background = new THREE.Color(0x000000);
+                this.scene.background = new THREE.Color('#004D00');
                 this.scene.fog = new THREE.FogExp2(0x000000, 0.015);
 
                 this.camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 1000);
@@ -414,7 +423,7 @@
                     treeArr.push(new THREE.Vector3(Math.cos(theta)*rVar, y, Math.sin(theta)*rVar));
                 }
                 this.positions.tree = treeArr;
-                await this.updateText("P r e t t y  g i r l !");
+                await this.updateText("Pretty girl!");
             }
 
             updateText(str) {
@@ -534,6 +543,8 @@
                                  const timeLeft = Math.ceil((3000 - elapsed)/1000);
                                  statusEl.innerHTML = `☝🏻 Giữ yên 1 ngón tay sau ${timeLeft}s để quay về cây thông`;
                             }
+                        } else {
+                            this.holdStart = 0; statusEl.innerHTML = "☝🏻 1 ngón tay: cây thông | 👋🏻 Lắc tay = Bùm";
                         }
                     } else {
                         this.holdStart = 0; this.twoFingerStart = 0;
