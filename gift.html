@@ -195,6 +195,10 @@
                 <span class="icon">✊🏻</span> 
                 <span>Nắm bàn tay là thu lại cây thông</span>
             </div>
+            <div class="guide-item">
+                <span class="icon">📷</span> 
+                <span>Nếu camera không dùng được thì cậu tải lại trang hoặc nhờ tớ nhe😊</span>
+            </div>
             
             <button id="start-btn" onclick="closeIntro()" >Người đẹp hiểu rồi thì bấm vào đây nhen🫶🏻💝</button>
         </div>
@@ -208,7 +212,7 @@
         <div id="cam-overlay"></div>
     </div>
     
-    <div id="gesture-debug">Đang tìm bàn tay...</div>
+    <div id="gesture-debug">Đang tìm camera...</div>
 
     <audio id="background-music" src="img_n_sound/Chẳng giống Giáng sinh.mp3" loop style="display: none;"></audio>
 
@@ -538,7 +542,7 @@
                     vid.addEventListener("loadeddata", () => this.predictWebcam());
                 } catch(e) { 
                     console.error("Cam Error", e); 
-                    document.getElementById('gesture-debug').innerHTML = "Lỗi Camera: Hãy cấp quyền hoặc thử lại.";
+                    document.getElementById('gesture-debug').innerHTML = "Cậu cho phép dùng camera để xem cây thông nhe☺️";
                 }
             }
 
@@ -667,7 +671,7 @@
                     this.state.mode = targetMode;
                     if (targetMode === 'tree') {
                         this.targetPositions = this.positions.tree;
-                        document.getElementById('main-title').innerText = "Giáng sinh an lành😘";
+                        document.getElementById('main-title').innerText = "Luôn vui vẻ, yêu đời nhé cô gái xinh đẹp ơiii😘";
                     } else if (targetMode === 'text') {
                         this.targetPositions = this.positions.text;
                         document.getElementById('main-title').innerText = "Luôn vui vẻ, yêu đời nhé cô gái xinh đẹp ơiii😘";
