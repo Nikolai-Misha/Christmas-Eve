@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cây thông Noel của Chi</title>
-    <link rel="icon" href="images/snow-flakes.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Borel&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -120,6 +119,53 @@
 /* Siêu nhỏ (≤350px) */
 @media (max-width: 350px) {#main-title{font-size:1.9rem;}#gesture-debug{font-size:1rem;}#cam-container{width:130px;height:97.5px;}#intro-box{padding:15px 25px;}#intro-box h2{font-size:1.6rem;}.guide-item{font-size:1.3rem;}#start-btn{padding:6px 20px;font-size:1rem;}}
 
+        /* --- Wish Overlay --- */
+        #wish-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: none; align-items: center; justify-content: center;
+            z-index: 2000;
+            transition: opacity 0.8s ease-out, visibility 0.8s;
+        }
+        #wish-box {
+            width: 90%; max-width: 500px;
+            background: rgba(20, 20, 20, 0.95);
+            border: 2px solid #D4AF37;
+            border-radius: 25px;
+            padding: 40px 50px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+            color: #FFD700;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        #wish-box img {
+            max-width: 100%; height: auto; margin-bottom: 20px; border-radius: 10px;
+        }
+        #wish-box p {
+            font-size: 22px; margin: 0; color: #FFF8DC;
+        }
+        #close-wish {
+            background: #D4AF37; color: #000; border: none;
+            padding: 12px 40px; border-radius: 25px;
+            font-family: 'Borel', serif; font-weight: bold; font-size: 16px;
+            cursor: pointer; margin-top: 25px; transition: 0.3s;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+        #close-wish:hover { background: #FFF; box-shadow: 0 0 30px #FFF; transform: scale(1.05); }
+
+        /* --- Wish Button --- */
+        #wish-btn {
+            position: absolute; bottom: 20px; right: 20px;
+            background: #D4AF37; color: #000; border: none;
+            padding: 10px 20px; border-radius: 20px;
+            font-family: 'Borel', serif; font-weight: bold; font-size: 14px;
+            cursor: pointer; transition: 0.3s;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            z-index: 10;
+            display: flex; align-items: center; justify-content: center;
+        }
+        #wish-btn:hover { background: #FFF; box-shadow: 0 0 30px #FFF; transform: scale(1.05); }
     </style>
 </head>
 <body>
@@ -166,6 +212,19 @@
 
     <audio id="background-music" src="img_n_sound/Chẳng giống Giáng sinh.mp3" loop style="display: none;"></audio>
 
+    <!-- Wish Button -->
+    <button id="wish-btn" onclick="showWish()">💌</button>
+
+    <!-- Wish Overlay -->
+    <div id="wish-overlay" onclick="closeWish()">
+        <div id="wish-box" onclick="event.stopPropagation();">
+            <img src="https://pub-35faf01d0bac49249f374189fd3a24d9.r2.dev/images/1766489460553-fb79f69d-ece6-4aba-af24-870c148c3dc6.jpg"> <!-- Thay bằng đường dẫn ảnh thực tế -->
+            <p>Chúc Chi luôn học giỏi, xinh đẹp, yêu đời!!!</p>
+            <p>Hãy luôn vui tươi nhé người ơi😘</p>
+            <button id="close-wish" onclick="closeWish()">Đóng lời chúc</button>
+        </div>
+    </div>
+
     <script>
         // Hàm tắt màn hình hướng dẫn
         function closeIntro() {
@@ -177,6 +236,26 @@
             const music = document.getElementById('background-music');
             music.volume = 0.03; // Giảm âm lượng xuống 5%
             music.play();
+            // Lazy init AI
+            window.app.initAI();
+        }
+
+        // Hàm hiển thị lời chúc
+        function showWish() {
+            const overlay = document.getElementById('wish-overlay');
+            overlay.style.display = 'flex';
+            overlay.style.opacity = '1';
+            overlay.style.visibility = 'visible';
+        }
+
+        // Hàm đóng lời chúc
+        function closeWish() {
+            const overlay = document.getElementById('wish-overlay');
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                overlay.style.visibility = 'hidden';
+            }, 800);
         }
     </script>
 
@@ -203,8 +282,8 @@
         class ChristmasGestures {
             constructor() {
                 this.config = {
-                    particleCount: 6500,
-                    snowCount: 900,
+                    particleCount: 3000,
+                    snowCount: 400,
                     frameCount: 8,       
                     colors: [0xFFD700, 0xFFE5B4, 0xDAA520, 0xFFFFE0, 0xB8860B, 0xFF0000, 0xDC143C] 
                 };
@@ -238,7 +317,7 @@
                 this.initParticles();
                 this.initFrames(); // Chứa phần thêm ảnh
                 this.initSnow();
-                this.initAI();
+                // AI init moved to closeIntro
 
                 new FontLoader().load('https://threejs.org/examples/fonts/optimer_bold.typeface.json', (font) => {
                     this.loadedFont = font;
@@ -268,7 +347,7 @@
 
             initThree() {
                 this.scene = new THREE.Scene();
-                this.scene.background = new THREE.Color('#000');
+                this.scene.background = new THREE.Color(0x000000);
                 this.scene.fog = new THREE.FogExp2(0x000000, 0.015);
 
                 this.camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 1000);
@@ -278,7 +357,8 @@
                     antialias: false, powerPreference: "high-performance", preserveDrawingBuffer: true 
                 });
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
-                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                if (window.innerWidth < 768) this.renderer.setPixelRatio(1);
+                else this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
                 this.renderer.outputColorSpace = THREE.SRGBColorSpace; 
                 this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
                 document.body.appendChild(this.renderer.domElement);
@@ -306,7 +386,7 @@
             }
 
             initParticles() {
-                const geo = new THREE.SphereGeometry(0.12, 6, 6);
+                const geo = new THREE.SphereGeometry(0.12, 4, 4);
                 const mat = new THREE.MeshBasicMaterial({ color: 0xffffff });
                 this.instancedMesh = new THREE.InstancedMesh(geo, mat, this.config.particleCount);
                 this.scene.add(this.instancedMesh);
@@ -422,7 +502,7 @@
                     treeArr.push(new THREE.Vector3(Math.cos(theta)*rVar, y, Math.sin(theta)*rVar));
                 }
                 this.positions.tree = treeArr;
-                await this.updateText("Pretty girl!");
+                await this.updateText("P r e t t y  g i r l !");
             }
 
             updateText(str) {
@@ -665,15 +745,17 @@
                     this.frames.forEach(f => f.mesh.visible = false);
                 }
 
-                const snPos = this.snowSystem.geometry.attributes.position.array;
-                for(let j=0; j<this.config.snowCount; j++){
-                    snPos[j*3+1] -= this.snowVel[j].y;
-                    snPos[j*3] += Math.sin(time + this.snowVel[j].sway) * 0.1;
-                    if(snPos[j*3+1] < -100) {
-                        snPos[j*3+1] = 100; snPos[j*3] = (Math.random()-0.5)*300;
+                if (time % 0.05 < 0.001) {
+                    const snPos = this.snowSystem.geometry.attributes.position.array;
+                    for(let j=0; j<this.config.snowCount; j++){
+                        snPos[j*3+1] -= this.snowVel[j].y;
+                        snPos[j*3] += Math.sin(time + this.snowVel[j].sway) * 0.1;
+                        if(snPos[j*3+1] < -100) {
+                            snPos[j*3+1] = 100; snPos[j*3] = (Math.random()-0.5)*300;
+                        }
                     }
+                    this.snowSystem.geometry.attributes.position.needsUpdate = true;
                 }
-                this.snowSystem.geometry.attributes.position.needsUpdate = true;
                 this.composer.render();
             }
 
